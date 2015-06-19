@@ -65,7 +65,7 @@ and the target site uses simple PHP files as templates system. Then altered butt
 ?>
 
 <!-- mibew button -->
-    <a id="mibew-agent-button" href="/chat?locale=en&first_message=<?php echo($viewed_page); ?>" target="_blank" onclick="Mibew.Objects.ChatPopups['5584079b15e45950'].open();return false;">
+    <a id="mibew-agent-button" href="/chat?locale=en&amp;first_message=<?php echo($viewed_page); ?>" target="_blank" onclick="Mibew.Objects.ChatPopups['5584079b15e45950'].open();return false;">
         <img src="/b?i=mibew&amp;lang=en" border="0" alt="" />
     </a>
     <script type="text/javascript" src="/js/compiled/chat_popup.js"></script>
@@ -98,7 +98,7 @@ get in the chat window something like the following:
 The plugin can be configured with values in "`<Mibew root>`/configs/config.yml"
 file.
 
-### config.ignore_emoticons
+### config.template
 
 Type: `String`
 
