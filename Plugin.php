@@ -30,8 +30,6 @@ use Mibew\Thread;
 
 /**
  * Represents the plugin.
- *
- * @todo First messages cleaning for closed threads.
  */
 class Plugin extends \Mibew\Plugin\AbstractPlugin implements \Mibew\Plugin\PluginInterface
 {
@@ -68,6 +66,7 @@ class Plugin extends \Mibew\Plugin\AbstractPlugin implements \Mibew\Plugin\Plugi
         // Attach CSS and JS files of the plugin to chat window.
         $dispatcher = EventDispatcher::getInstance();
         $dispatcher->attachListener(Events::THREAD_USER_IS_READY, $this, 'sendFirstMessage');
+        $dispatcher->attachListener(Events::THREAD_CLOSE, $this, 'removeOldMessage');
     }
 
     /**
@@ -97,6 +96,28 @@ class Plugin extends \Mibew\Plugin\AbstractPlugin implements \Mibew\Plugin\Plugi
                 );
 
                 // The message is not needed anymore.
+                $message->delete();
+            }
+        }
+    }
+
+    /**
+     * Removes messages for threads that are closed.
+     *
+     * It's a listener of {@link \Mibew\EventDispatcher\Events::THREAD_CLOSE}
+     * event.
+     *
+     * @param array $args List of arguments that is passed to the event.
+     */
+    public function removeOldMessage(&$args)
+    {
+        $thread = $args['thread'];
+        if ($thread->userId) {
+            $message = Message::loadByUserId($thread->userId);
+            if ($message) {
+                // There is a first message associated with the user ID. Delete
+                // it because the thread is closed now and the message cannot be
+                // used anymore.
                 $message->delete();
             }
         }
