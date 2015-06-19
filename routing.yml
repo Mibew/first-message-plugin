@@ -1,0 +1,4 @@
+chat_user_start:
+    path: /chat
+    defaults:
+        _controller: Mibew\Mibew\Plugin\FirstMessage\Controller\UserChatController::startAction
