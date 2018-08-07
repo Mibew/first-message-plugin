@@ -16,7 +16,7 @@ gulp.task('prepare-release', function() {
             .pipe(tar('first-message-plugin-' + version + '.tar'))
             .pipe(gzip())
     )
-    .pipe(chmod(0644))
+    .pipe(chmod(644))
     .pipe(gulp.dest('release'));
 });
 
