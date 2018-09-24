@@ -141,7 +141,7 @@ class Plugin extends \Mibew\Plugin\AbstractPlugin implements \Mibew\Plugin\Plugi
     public static function getSystemRequirements()
     {
         return array(
-            'mibew' => '^2.1.0'
+            'mibew' => '>=2.1.0'
         );
     }
 
